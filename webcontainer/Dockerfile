@@ -9,11 +9,11 @@ RUN apt-get install -y  nginx \
             supervisor
             
 #remove default nginx configuration
-RUN rm /etc/nginx/sites-enabled/default.conf
+RUN rm -f /etc/nginx/sites-enabled/default*
 ADD site.conf /etc/nginx/sites-enabled/site.conf
 
 #remove and add a nginx.conf
-RUN rm /etc/nginx/nginx.conf
+RUN rm -f /etc/nginx/nginx.conf
 ADD nginx.conf /etc/nginx.conf
 
 #add supervisor for nginx
