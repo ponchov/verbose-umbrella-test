@@ -4,9 +4,19 @@ FROM ubuntu:latest
 #update apt
 RUN apt-get update -y
 
-#install necessary services
-RUN apt-get install nginx -y
-RUN apt-get install php5-fpm, php5-mysql -y
+#install nginx
+RUN apt-get install -y  nginx \
+            nginx \
+            supervisor
+            
+#remove default nginx configuration
+RUN rm /etc/nginx/sites-enabled/default.conf
+
+#remove and add a nginx.conf
+RUN rm /etc/nginx/nginx.conf
+ADD nginx.conf /etc/nginx.conf
 
 
-supervisor
+
+EXPOSE 80
+CMD ["/usr/bin/supervisord"]
