@@ -14,7 +14,7 @@ ADD site.conf /etc/nginx/sites-enabled/site.conf
 
 #remove and add a nginx.conf
 RUN rm -f /etc/nginx/nginx.conf
-ADD nginx.conf /etc/nginx.conf
+ADD nginx.conf /etc/nginx/nginx.conf
 
 #add supervisor for nginx
 ADD nginx_supervisor.conf /etc/supervisor/conf.d/nginx_supervisor.conf
