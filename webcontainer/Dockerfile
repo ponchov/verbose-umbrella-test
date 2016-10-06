@@ -21,4 +21,6 @@ ADD nginx_supervisor.conf /etc/supervisor/conf.d/nginx_supervisor.conf
 
 EXPOSE 80
 
-CMD ["supervisor", "-c", "/etc/supervisor.conf/nginx_supervisor.conf"]
+#CMD ["supervisor", "-c", "/etc/supervisor.conf/nginx_supervisor.conf"]
+
+CMD ["/usr/bin/supervisord"]
