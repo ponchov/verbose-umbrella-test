@@ -1,25 +1,31 @@
-##web application
-web:
- build: ./webcontainer
- 
- ports:
-  - "80:80"
- depends_on:
-  - db     
-  - php
+- version '1'
 
-##php container
+ #web application
+- web:
+  build: ./webcontainer
+ # command: /usr/bin/supervisord
+
+  ports:
+   - "8080:80"
+  depends_on:
+   - db 
+     
+   - php
+
+ #php container
   php:
    build ./php.container
+ 
   ports:
    - "9000:9000"
 
-##mysql container
- db:
-  build ./mysql_container
-  ports:
+ #mysql container
+- db:
+   build ./mysql_container
+
+- ports:
   - "3306:3306"
-   environment:
+    environment:
     MYSQL_ROOT_PASSWORD: root
     MYSQL_USER: root
     MYSQL_PASSWORD: userpass
