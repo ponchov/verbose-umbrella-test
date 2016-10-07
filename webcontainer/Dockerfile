@@ -17,10 +17,10 @@ RUN rm -f /etc/nginx/nginx.conf
 ADD nginx.conf /etc/nginx/nginx.conf
 
 #add supervisor for nginx
-ADD nginx_supervisor.conf /etc/supervisor/conf.d/nginx_supervisor.conf
+ADD nginx_supervisor.conf /etc/supervisor/supervisord.conf
 
 EXPOSE 80
 
-#CMD ["supervisor", "-c", "/etc/supervisor.conf/nginx_supervisor.conf"]
+#CMD ["supervisord", "-c", "/etc/supervisor/conf.d/nginx_supervisor.conf"]
 
 CMD ["/usr/bin/supervisord"]
