@@ -16,6 +16,12 @@ ADD site.conf /etc/nginx/sites-enabled/site.conf
 RUN rm -f /etc/nginx/nginx.conf
 ADD nginx.conf /etc/nginx/nginx.conf
 
+#ADD php scripts
+RUN mkdir /var/www/umbrella
+ADD search_employees.php /var/www/umbrella/
+ADD employees.php /var/www/umbrella/
+ADD index.html  /var/www/umbrella/
+
 #add supervisor for nginx
 ADD nginx_supervisor.conf /etc/supervisor/supervisord.conf
 
