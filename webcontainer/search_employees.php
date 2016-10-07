@@ -1,6 +1,6 @@
 <?php 
 
-$con = mysqli_connect('localhost', 'root', 'toor', 'employees');
+$con = mysqli_connect('db', 'root', 'userpass', 'employees');
 
 $gender = $_POST['gender'];
 $bd_cond = $_POST['bd_cond'];
