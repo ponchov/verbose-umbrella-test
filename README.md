@@ -4,13 +4,13 @@ This is a repo for Andres Montalban
 
 This is a docker compose project which is intended to demonstrate the use of it, showing the best practices of how to develop a project using docker.
 
-#Recommended versions:
+##Recommended versions:
 
 Docker: 1.12~
 
 Docker Compose 1.8~
 
-#Steps to build the project
+##Steps to build the project
 
 In order to start the project you'll have to clone the repository
 
@@ -31,9 +31,9 @@ once you start the project, you'll have to edit your hostfile
 
 Now you'll be able to visit testapp.com in the browser and see the application
 
-#Notes:
+##Notes:
 
-The webserver container utilizes port 80 on yor local machine, so if you want to change the port, you can change it on the `docker-compose.yml` file.
+1.- The webserver container utilizes port 80 on yor local machine, so if you want to change the port, you can change it on the `docker-compose.yml` file.
 
 For example:
 
@@ -44,4 +44,6 @@ web:
     ports:
         - "90:80"
 ```
+
+2.- After you build the project, you'll have to wait around 30 seconds for the data to load into the DB. This is because the data is big and the mysql continer takes a bit longer 
 
