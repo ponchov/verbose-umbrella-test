@@ -1,43 +1,20 @@
 FROM ubuntu:latest
 
-#update apt
-RUN apt-get update -y
-
-#install php 
-
-RUN apt-get install -y php7.0-fpm \
- php7.0-cli \
- php7.0-common \
- php7.0-json \
- php7.0-opcache \
- php7.0-mysql \
- php7.0-phpdbg \
- php7.0-mbstring \
- php7.0-gd \
- php7.0-imap \ 
- php7.0-ldap \
- php7.0-pgsql \
- php7.0-pspell \
- php7.0-recode \
- php7.0-snmp \
- php7.0-tidy \
- php7.0-dev \
- php7.0-intl \
- php7.0-gd \
- php7.0-curl \
- php7.0-zip \
- php7.0-xml \
- supervisor
-
-#changing www.conf file
-ADD www.conf /etc/php/7.0/fpm/pool.d/www.conf
+RUN apt-get update && apt-get install -y software-properties-common language-pack-en-base \
+    && LC_ALL=en_US.UTF-8 add-apt-repository -y ppa:ondrej/php \
+    && apt-get update \
+    && apt-get install -y php7.0 php7.0-fpm php7.0-mysql mcrypt php7.0-gd curl \
+       php7.0-curl php-redis php7.0-mbstring sendmail supervisor \
+    && mkdir /run/php \
+    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ADD php_supervisor.conf /etc/supervisor/supervisord.conf
 
+RUN sed -i -e 's/listen = \/run\/php\/php7.0-fpm.sock/listen = 0.0.0.0:9000/g' /etc/php/7.0/fpm/pool.d/www.conf \
+    && sed -i -e 's/;daemonize = yes/daemonize = no/g' /etc/php/7.0/fpm/php-fpm.conf
+
+WORKDIR /code
+
 EXPOSE 9000
 
-
 CMD ["/usr/bin/supervisord"]
-
-
-
