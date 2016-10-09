@@ -1,6 +1,6 @@
 <?php 
 
-$con = mysqli_connect('db', 'root', 'userpass', 'employees');
+$con = mysqli_connect('db', 'root', 'root', 'employees');
 
 //$employees = mysqli_query($con, "SELECT * FROM  employees WHERE gender =  'M' AND birth_date =  '1965-02-01' AND hire_date > '1990-01-01' ORDER BY first_name ASC");
 

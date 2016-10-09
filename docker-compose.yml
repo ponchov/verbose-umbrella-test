@@ -1,35 +1,29 @@
-version: '2'
-services:
-  web:
-    build: ./webcontainer/
-    #  context: ./webcontainer
-# command: /usr/bin/supervisord
-
+web:
+    image: nginx:latest
     ports:
-      - "8080:80"
-    depends_on:
-      - db  
-      - php
+        - "80:80"
+    volumes:
+        - ./webcontainer/code:/code
+        - ./webcontainer/site.conf:/etc/nginx/conf.d/site.conf
 
-#php container
-  php:
-    build: ./php_container
-   #   context: ./php.container
+    links:
+        - php
+        - db
 
-    ports:
-     - "9000:9000"
 
-#mysql container
-  db:
-    build: ./mysql_container
-     # context: ./mysql_container
+php:
+    image: php:7-fpm
+    volumes:
+        - ./webcontainer/code:/code
 
-    ports:
-     - "3306:3306"
+db:
+#    image: mysql
+  build: ./mysql_container
+   # context: ./mysql_container
 
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: root
-      MYSQL_PASSWORD: userpass
-      MYSQL_DATABASE: employees
+  environment:
+    MYSQL_ROOT_PASSWORD: root
+    MYSQL_USER: root
+#    volumes:
+#      - ./mysql_container/employees.sql:/docker-entrypoint-initdb.d
 
