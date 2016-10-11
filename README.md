@@ -25,7 +25,7 @@ start the containers
 
 `docker-compose up --build -d`
 
-once you start the project, you'll have to edit your hostfile
+once you start the project, you'll have to edit your hostfile with the ip of the server, in this case I'm using my lcoal machine, so I'm using 127.0.0.1, but if its a remote server, you will use the server ip
 
 `sudo echo "127.0.0.1 testapp.com" > /etc/hosts`
 
